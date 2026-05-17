@@ -11,6 +11,11 @@ export default function Navbar() {
     <nav className="navbar">
       <Link to="/" className="navbar-brand">🌿 Nourish</Link>
       <div className="navbar-links">
+        <Link to="/">
+  <button className="btn btn-outline btn-sm">
+    Home
+  </button>
+</Link>
         <Link to="/impact">
           <button className="btn btn-outline btn-sm">Impact</button>
         </Link>

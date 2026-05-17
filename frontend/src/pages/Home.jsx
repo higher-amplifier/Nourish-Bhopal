@@ -36,13 +36,35 @@ export default function Home() {
 
   return (
     <div className="page">
-      <div className="container">
+      <div
+  style={{
+    width: '100%',
+    maxWidth: '1400px',
+    margin: '0 auto',
+    padding: '0 24px',
+  }}
+>
         {/* Hero */}
-        <div style={{ textAlign: 'center', marginBottom: 40, padding: '20px 0' }}>
+        <div
+  style={{
+    textAlign: 'center',
+    marginBottom: 40,
+    padding: '40px 20px',
+    width: '100%',
+  }}
+>
           <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 12 }}>
             🌿 Rescue food. Feed hope.
           </h1>
-          <p style={{ fontSize: 18, color: '#666', maxWidth: 500, margin: '0 auto 24px' }}>
+        <p
+  style={{
+    fontSize: 24,
+    color: '#666',
+    maxWidth: 950,
+    margin: '0 auto 32px',
+    lineHeight: 1.6,
+  }}
+>
             Connecting MANIT hostel messes, canteens &amp; wedding halls with volunteers to rescue surplus food — real-time, in Bhopal.
           </p>
           {!user && (
@@ -87,6 +109,27 @@ export default function Home() {
           </div>
         )}
       </div>
+      {/* Banner Image */}
+<div
+  style={{
+    marginBottom: 40,
+    borderRadius: 24,
+    overflow: 'hidden',
+    position: 'relative',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+  }}
+>
+  <img
+    src="/hero.png"
+    alt="Nourish Banner"
+    style={{
+  width: '100%',
+  display: 'block',
+  objectFit: 'cover',
+  maxHeight: '500px',
+}}
+  />
+</div>
     </div>
   );
 }

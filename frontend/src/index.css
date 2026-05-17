@@ -168,3 +168,24 @@ input:focus, select:focus, textarea:focus { border-color: var(--green); }
 .lb-rank.gold { color: #BA7517; }
 .lb-rank.silver { color: #888780; }
 .lb-rank.bronze { color: #993C1D; }
+@media (max-width: 768px) {
+
+  .page {
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 42px !important;
+    line-height: 1.2 !important;
+  }
+
+  p {
+    font-size: 18px !important;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+}
