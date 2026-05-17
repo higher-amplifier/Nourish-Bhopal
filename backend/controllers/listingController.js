@@ -20,10 +20,10 @@ const getListings = async (req, res) => {
       };
     }
 
-    const listings = await Listing.find(filter)
-      .populate('donor', 'name address phone')
-      .populate('claimedBy', 'name phone')
-      .sort({ createdAt: -1 })
+    const listings = await Listing.find({ donor: req.user._id })
+  .populate('donor', '_id name address phone')
+  .populate('claimedBy', '_id name phone')
+  .sort({ createdAt: -1 })
       .limit(50);
 
     res.json(listings);
