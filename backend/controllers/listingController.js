@@ -68,17 +68,16 @@ const getListing = async (req, res) => {
 // POST /api/listings
 const createListing = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      quantity,
-      unit,
-      foodType,
-      address,
-      lat,
-      lng,
-      expiresInHours,
-    } = req.body;
+  const {
+  title,
+  description,
+  quantity,
+  unit,
+  foodType,
+  address,
+  location,
+  expiresInHours,
+} = req.body;
 
     const expiresAt = new Date(
       Date.now() + (expiresInHours || 2) * 60 * 60 * 1000
@@ -92,10 +91,7 @@ const createListing = async (req, res) => {
       foodType,
       address,
       donor: req.user._id,
-      location: {
-        type: 'Point',
-        coordinates: [parseFloat(lng), parseFloat(lat)],
-      },
+      location,
       expiresAt,
     });
 

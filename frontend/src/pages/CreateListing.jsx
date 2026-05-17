@@ -48,23 +48,84 @@ export default function CreateListing() {
 
   const getGPS = () => {
     navigator.geolocation.getCurrentPosition(
-      pos => setForm(f => ({ ...f, lat: pos.coords.latitude.toString(), lng: pos.coords.longitude.toString() })),
-      () => alert('Could not get GPS location')
+pos => setForm(f => ({
+  ...f,
+  lat: pos.coords.latitude.toString(),
+  lng: pos.coords.longitude.toString(),
+  address: 'Current GPS Location'
+})),      () => alert('Could not get GPS location')
     );
   };
 
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!form.lat || !form.lng) return setError('Please set a location');
-    setError(''); setLoading(true);
-    try {
-      await api.post('/listings', { ...form, quantity: Number(form.quantity) });
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to post listing');
-    } finally { setLoading(false); }
-  };
+  const getCoordinatesFromAddress = async (address) => {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
+    );
 
+    const data = await res.json();
+
+    if (data && data.length > 0) {
+      return {
+        lat: data[0].lat,
+        lng: data[0].lon,
+      };
+    }
+
+    return null;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+const submit = async (e) => {
+  e.preventDefault();
+
+  let updatedForm = { ...form };
+
+  // Convert custom address into coordinates
+  if (
+    form.address &&
+    (!form.lat || !form.lng || locPreset === 'Custom (enter below)')
+  ) {
+    const coords = await getCoordinatesFromAddress(form.address);
+
+    if (!coords) {
+      return setError('Address not found');
+    }
+
+    updatedForm.lat = coords.lat;
+    updatedForm.lng = coords.lng;
+  }
+
+  if (!updatedForm.lat || !updatedForm.lng) {
+    return setError('Please set a location');
+  }
+
+  setError('');
+  setLoading(true);
+
+  try {
+    await api.post('/listings', {
+  ...updatedForm,
+  quantity: Number(updatedForm.quantity),
+
+  location: {
+    type: 'Point',
+    coordinates: [
+      Number(updatedForm.lng),
+      Number(updatedForm.lat),
+    ],
+  },
+});
+    navigate('/dashboard');
+  } catch (err) {
+    setError(err.response?.data?.message || 'Failed to post listing');
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="page">
       <div className="container" style={{ maxWidth: 600 }}>
