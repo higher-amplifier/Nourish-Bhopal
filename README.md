@@ -1,65 +1,54 @@
 # 🌿 Nourish — Rescue Food, Feed Hope
-### Built for MANIT Bhopal · Fighting hostel mess & wedding food waste
+# Nourish
 
-A full-stack real-time food rescue platform connecting MANIT hostel messes, college canteens, and Bhopal wedding halls with volunteers and NGOs.
+Nourish is a full-stack MERN application that helps reduce food waste by connecting food donors with NGOs and organizations. It provides a simple platform where donors can list surplus food, NGOs can browse available donations, and both parties can coordinate efficiently to ensure food reaches people in need instead of going to waste.
 
----
+## Features
 
-## 📁 Project Structure
+- Secure authentication and authorization using JWT
+- Role-based access for donors and NGOs
+- Create, update, and manage food donations
+- Browse and accept available donations
+- Responsive and intuitive user interface
+- RESTful API architecture
+- Secure password hashing with bcrypt
+- MongoDB database integration
+
+## Tech Stack
+
+**Frontend**
+- React.js
+- Vite
+- React Router
+- Axios
+- Tailwind CSS
+
+**Backend**
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+
+## Project Structure
 
 ```
-nourish/
-├── backend/          ← Node.js + Express + MongoDB + Socket.io
-└── frontend/         ← React + Vite + Leaflet + Socket.io-client
+Nourish/
+├── frontend/
+├── backend/
+└── README.md
 ```
 
----
+## Future Improvements
 
-## 🚀 Setup Guide (Step by Step)
+- Real-time notifications
+- Live donation tracking
+- Google Maps integration
+- Image uploads
+- Email notifications
+- Admin dashboard
 
-### 1. MongoDB Atlas (free)
-1. Go to https://cloud.mongodb.com → create free account
-2. Create a free M0 cluster
-3. Click **Connect → Drivers** → copy the URI
-4. Whitelist your IP (or use 0.0.0.0/0 for dev)
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-cp .env.example .env
-# Edit .env — paste your MongoDB URI and set JWT_SECRET
-npm run dev
-# Backend runs on http://localhost:5000
-```
-
-### 3. Frontend Setup
-```bash
-cd frontend
-npm install
-cp .env.example .env
-# .env already set to http://localhost:5000 for local dev
-npm run dev
-# Frontend runs on http://localhost:5173
-```
-
----
-
-## 🌐 Deployment
-
-### Backend → Render (free)
-1. Push backend folder to GitHub
-2. Go to https://render.com → New Web Service
-3. Connect repo → Build command: `npm install` → Start: `npm start`
-4. Add environment variables from your .env
-
-### Frontend → Vercel (free)
-1. Push frontend folder to GitHub
-2. Go to https://vercel.com → Import project
-3. Set `VITE_API_URL` = your Render backend URL (e.g. https://nourish-api.onrender.com)
-4. Deploy
-
----
 
 ## 👥 User Roles
 
